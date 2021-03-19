@@ -56,7 +56,7 @@ pipeline {
         }
         stage('Run Docker Image'){
             steps{
-                sh "docker run -d --name gatling-test-container -p 8088:8080 ${dockerImage}"
+                sh "docker run --name gatling-test-container -p 8088:8080 ${dockerImage}"
             }
         }
         stage('Load Test of Application'){
@@ -67,7 +67,6 @@ pipeline {
         stage('Stop Docker Image'){
             steps{
                 sh "docker stop gatling-test-container"
-                sh "docker container rm gatling-test-container"
             }
         }
         stage('Push Image to Docker Hub'){
